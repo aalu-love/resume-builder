@@ -20,10 +20,12 @@ The **Resume Builder** is a web application that allows users to easily generate
 ## How It Works
 
 1. Users can enter their resume content in the provided text template.
-2. The application validates if the required fields are filled in before generating the resume.
-3. If the user tries to generate the resume without filling in the required fields, a custom alert message is displayed for 2 seconds.
-4. When the user successfully enters all the required information and clicks the "Generate Resume" button, the resume is generated based on the entered content.
-5. Users can then download the generated resume as a PDF or print it (margin: { top: 0.19', buttom: 0.19' }, scale: 95, header/footer: off).
+2. Use the given template to genrate a prompt in ChatGPT that 'resume builder with given template'
+3. After genrated response form ChatGPT paste it in the input field.
+4. The application validates if the required fields are filled in before generating the resume.
+5. If the user tries to generate the resume without filling in the required fields, a custom alert message is displayed for 2 seconds.
+6. When the user successfully enters all the required information and clicks the "Generate Resume" button, the resume is generated based on the entered content.
+7. Users can then download the generated resume as a PDF or print it (margin: { top: 0.19', buttom: 0.19' }, scale: 95, header/footer: off).
 
 ## Why It's Useful
 
@@ -52,3 +54,61 @@ Repository: [Resume Builder GitHub Repository](https://github.com/aalu-love/resu
 ---
 
 Feel free to customize this Markdown file to include more details about your project, such as installation instructions, screenshots, and additional features.
+
+## Template
+```
+[Your Name]
+[Your Job Title] | [Your Skills/Expertise]
+
+Contact
+Address: [Your Address]
+Phone: [Your Phone Number]
+Email: [Your Email]
+LinkedIn: [Your LinkedIn Profile]
+Portfolio: [Your Portfolio Website]
+Github: [Your GitHub Profile]
+
+Summary
+[Summary About Yourself]
+
+Skills
+- Programming: [Programming Languages]
+- Databases: [Databases]
+- Frameworks/Libraries: [Frameworks and Libraries]
+- Build Tools: [Build Tools]
+- Tools/Technologies: [Tools and Technologies]
+- Web Development: [Web Development Technologies]
+- Data Analysis: [Data Analysis Skills]
+- Version Control: [Version Control Tools]
+- Operating Systems: [Operating Systems]
+
+Education
+Master of Computer Applications (MCA): Information Technology
+[University Name] - [Location]
+(Expected Graduation: [Expected Graduation Date])
+
+Bachelor of Computer Applications (BCA): Information Technology
+[University Name] - [Location]
+[Graduation Date]
+
+Experience / Internships
+[Job Title/Position] - [Company Name] - [Location]
+[Start Date] - [End Date]
+- [Responsibilities and Achievements]
+
+Projects
+- [Project Name]
+- [Project Name]
+- [Project Name]
+- ...
+
+Certifications
+- [Certification Name]
+- [Certification Name]
+- ...
+
+Languages
+- English (Fluent)
+- Hindi (Native)
+
+```
