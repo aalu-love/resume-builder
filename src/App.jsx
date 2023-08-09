@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import extractInformation from './helper/ResumeBuilderHelper';
 import './App.scss';
-import { Template } from './helper/Template';
 
 function App() {
 	const [page, setPage] = useState(0);
@@ -37,9 +36,13 @@ function App() {
 			{page === 0 ? (
 				<>
 					{showAlert && <div className='alert'>Please fill in the textarea before generating the resume.</div>}
-					<h2>Template</h2>
-					<hr />
-					<Template />
+					<p>
+						<ol>
+							<li>
+								Open the <a href='https://github.com/aalu-love/resume-builder'>Resume Builder</a> link and follow the steps.
+							</li>
+						</ol>
+					</p>
 					<textarea id='w3review' name='w3review' rows='50' cols='100' value={resumeContext} onChange={handleTextareaChange} />
 					<br />
 					<button onClick={() => handleGenerate(resumeContext)}>Generate Resume</button>
