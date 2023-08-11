@@ -64,10 +64,10 @@ function extractInformation(text) {
 							switch (educationInfoIndex) {
 								case 0:
 									{
-										const educationInfo = line.split(':');
-										const degreeInfo = educationInfo[0].split('(');
+										const educationInfo = line?.split(':');
+										const degreeInfo = educationInfo[0]?.split('(');
 										const degree = degreeInfo[0]?.trim();
-										const degreeAbbreviation = degreeInfo[1].replace(')', '')?.trim();
+										const degreeAbbreviation = degreeInfo[1]?.replace(')', '')?.trim();
 										const specialization = educationInfo[1]?.trim();
 										info.education[educationIndex] = {
 											...info.education[educationIndex],
@@ -79,9 +79,9 @@ function extractInformation(text) {
 									break;
 								case 1:
 									{
-										const collegeAndLocation = line.split('-');
+										const collegeAndLocation = line?.split('–') || line?.split('-');
 										const college = collegeAndLocation[0]?.trim();
-										const locationInfo = collegeAndLocation[1].split(',');
+										const locationInfo = collegeAndLocation[1]?.split(',');
 										const city = locationInfo[0]?.trim();
 										const state = locationInfo[1]?.trim();
 										info.education[educationIndex] = {
@@ -121,8 +121,8 @@ function extractInformation(text) {
 									company,
 									location,
 								};
-							} else if (months.includes(line.split(' ')[0])) {
-								const duration = line.split('-');
+							} else if (months.includes(line?.split(' ')[0])) {
+								const duration = line?.split('-');
 								const startDate = duration[0]?.trim();
 								const endDate = duration[1]?.trim();
 								info.experience[experimentIndex] = {
@@ -133,8 +133,8 @@ function extractInformation(text) {
 									},
 								};
 							} else {
-								if (line.startsWith('-')) {
-									const description = line.slice(1)?.trim();
+								if (line?.startsWith('-')) {
+									const description = line?.slice(1)?.trim();
 									experienceInfoDesc.push(description);
 									info.experience[experimentIndex] = {
 										...info.experience[experimentIndex],
@@ -157,10 +157,10 @@ function extractInformation(text) {
 						}
 						break;
 					case 'projects':
-						info.projects.push(line.slice(1)?.trim());
+						info.projects.push(line?.slice(1)?.trim());
 						break;
 					case 'certifications':
-						info.certifications.push(line.slice(1)?.trim());
+						info.certifications.push(line?.slice(1)?.trim());
 						break;
 					case 'languages':
 						info.languages.push(line);
