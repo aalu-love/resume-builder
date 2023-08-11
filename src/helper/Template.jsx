@@ -32,12 +32,10 @@ function Template() {
 			<h2>5. PDF Generation</h2>
 			<p>⏳ The application will generate a PDF version of your resume using the entered content. This process may take a few seconds.</p>
 			<h2>6. Download Your PDF Resume</h2>
-			<p>🔗 After the PDF resume is generated, a download link will appear on the screen. Click the link to download your PDF resume to your device.</p>
+			<p>🔗 After the PDF resume is generated, Click on your name to download your PDF resume to your device.</p>
 			<h2>7. Review Your PDF Resume</h2>
 			<p>👓 Open the downloaded PDF resume using a PDF viewer to review the final output. Make sure all the information is accurately displayed and well-formatted.</p>
-			<h2>8. Optional: Print Your PDF Resume</h2>
-			<p>🖨️ If you need a hard copy of your resume, you can print the downloaded PDF. Use the print functionality of your PDF viewer to print the resume on paper.</p>
-			<h2>9. Save Your PDF Resume</h2>
+			<br />
 			<p>
 				💾 It&apos;s a good idea to save a copy of your PDF resume in a secure location on your device or cloud storage. This way, you can easily access it whenever you need to share
 				or update your resume.

@@ -29,7 +29,7 @@ function App() {
 		}
 	};
 
-	const propComp = { loading: isLoading, data };
+	const propComp = { loading: isLoading, data, setPage };
 
 	return (
 		<>
@@ -55,14 +55,23 @@ function App() {
 	);
 }
 
-function PageComponent({ data, loading }) {
+function PageComponent({ data, loading, setPage }) {
+	const [hide, setHide] = useState('');
+	const printResume = async () => {
+		await setHide('none');
+		await window.print();
+		await setHide('');
+	};
 	return (
 		<>
 			<div className='a4-page'>
 				{loading ? (
 					<>
+						<button style={{ display: hide }} onClick={() => setPage(0)}>
+							Back &lt;-
+						</button>
 						<span>
-							<h2 onClick={() => window.print()}>{data?.name}</h2>
+							<h2 onClick={printResume}>{data?.name}</h2>
 							<p>{data?.title}</p>
 						</span>
 						<PersonalInfo personalInfo={data?.contact} />
