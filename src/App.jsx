@@ -67,8 +67,8 @@ function PageComponent({ data, loading, setPage }) {
 			<div className='a4-page'>
 				{loading ? (
 					<>
-						<button style={{ display: hide }} onClick={() => setPage(0)}>
-							Back &lt;-
+						<button style={{ display: hide, width: '100px' }} onClick={() => setPage(0)}>
+							&lt; Back
 						</button>
 						<span>
 							<h2 onClick={printResume}>{data?.name}</h2>
