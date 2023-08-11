@@ -47,10 +47,15 @@ function extractInformation(text) {
 				switch (section) {
 					case 'contact':
 						{
-							const contactInfo = line.split(':');
-							const key = contactInfo?.length > 1 && contactInfo[0]?.trim().toLowerCase();
-							const value = contactInfo?.length > 1 && contactInfo[1]?.trim();
-							info.contact[key] = value;
+							try {
+								const contactInfo = line.split(':');
+								const key = contactInfo?.length > 1 && contactInfo[0]?.trim().toLowerCase().replace('-', '');
+								const value = contactInfo?.length > 1 && contactInfo[1]?.trim();
+								info.contact[key] = value;
+							} catch (e) {
+								console.error(`Error: ${e}`);
+								alert('Something went wrong in contact section.');
+							}
 						}
 						break;
 					case 'summary':

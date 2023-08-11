@@ -62,7 +62,7 @@ function PageComponent({ data, loading }) {
 				{loading ? (
 					<>
 						<span>
-							<h2>{data?.name}</h2>
+							<h2 onClick={() => window.print()}>{data?.name}</h2>
 							<p>{data?.title}</p>
 						</span>
 						<PersonalInfo personalInfo={data?.contact} />
