@@ -56,22 +56,30 @@ function App() {
 }
 
 function PageComponent({ data, loading, setPage }) {
-	const [hide, setHide] = useState('');
+	const [hide, setHide] = useState(true);
 	const printResume = async () => {
-		await setHide('none');
+		await setHide(false);
 		await window.print();
-		await setHide('');
+		await setHide(true);
 	};
 	return (
 		<>
 			<div className='a4-page'>
 				{loading ? (
 					<>
-						<button style={{ display: hide, width: '100px' }} onClick={() => setPage(0)}>
-							&lt; Back
-						</button>
+						{hide && (
+							<div style={{ display: 'flex', justifyContent: 'space-between' }} className='btn-group'>
+								<button style={{ width: '100px', marginBottom: '1rem' }} onClick={() => setPage(0)}>
+									&lt; Back
+								</button>
+								<button style={{ width: '100px', marginBottom: '1rem' }} onClick={printResume}>
+									Print
+								</button>
+							</div>
+						)}
+
 						<span>
-							<h2 onClick={printResume}>{data?.name}</h2>
+							<h2>{data?.name}</h2>
 							<p>{data?.title}</p>
 						</span>
 						<PersonalInfo personalInfo={data?.contact} />

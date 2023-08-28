@@ -84,9 +84,13 @@ function extractInformation(text) {
 									break;
 								case 1:
 									{
-										const collegeAndLocation = line?.split('–') || line?.split('-');
+										const collegeAndLocation = line?.split('-');
 										const college = collegeAndLocation[0]?.trim();
 										const locationInfo = collegeAndLocation[1]?.split(',');
+										console.log(line);
+										console.log(collegeAndLocation);
+										console.log(college);
+										console.log(locationInfo);
 										const city = locationInfo[0]?.trim();
 										const state = locationInfo[1]?.trim();
 										info.education[educationIndex] = {
