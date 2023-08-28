@@ -20,12 +20,13 @@ The **Resume Builder** is a web application that allows users to easily generate
 ## How It Works
 
 1. Users can enter their resume content in the provided text template.
-2. Use the given template to genrate a prompt in ChatGPT that 'resume builder with given template'
-3. After genrated response form ChatGPT paste it in the input field.
+2. Use the given template to genrate your resume details (for more convienent user ChatGPT: genrate a prompt in ChatGPT that 'resume builder with given template')
+3. After genrated your details paste it in the input field.
 4. The application validates if the required fields are filled in before generating the resume.
 5. If the user tries to generate the resume without filling in the required fields, a custom alert message is displayed for 2 seconds.
 6. When the user successfully enters all the required information and clicks the "Generate Resume" button, the resume is generated based on the entered content.
 7. Users can then download the generated resume as a PDF or print it (margin: { top: 0.19', buttom: 0.19' }, scale: 95, header/footer: off).
+8. Click on your name to print in PDF.
 
 ## Why It's Useful
 
