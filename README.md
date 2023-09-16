@@ -58,6 +58,7 @@ Feel free to customize this Markdown file to include more details about your pro
 
 ## Template
 ```
+
 [Your Name]
 [Your Job Title] | [Your Skills/Expertise]
 
@@ -92,10 +93,20 @@ Bachelor of Computer Applications (BCA): Information Technology
 [University Name] - [Location]
 [Graduation Date]
 
-Experience / Internships
-[Job Title/Position] - [Company Name] - [Location]
-[Start Date] - [End Date]
-- [Responsibilities and Achievements]
+Experience
+Employee: [Your Job Title]
+Employer: [Company Name]
+Duration: [Start Date] - [End Date]
+- [Key Responsibility or Achievement]
+- [Key Responsibility or Achievement]
+- [Key Responsibility or Achievement]
+
+Employee: [Your Job Title]
+Employer: [Company Name]
+Duration: [Start Date] - [End Date]
+- [Key Responsibility or Achievement]
+- [Key Responsibility or Achievement]
+- [Key Responsibility or Achievement]
 
 Projects
 - [Project Name]
