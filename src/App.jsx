@@ -8,24 +8,37 @@ function App() {
 	const [data, setResumeDetail] = useState({});
 	const [isLoading, setLoading] = useState(false);
 	const [showAlert, setShowAlert] = useState(false);
+	const [showError, setError] = useState('');
 	const [resumeContext, setResumeContext] = useState('');
 
 	const handleTextareaChange = event => {
 		setResumeContext(event.target.value);
 	};
 
+	const showMessage = (message, time = 2000) => {
+		setError(message);
+		setShowAlert(true);
+		setTimeout(() => {
+			setShowAlert(false);
+		}, time);
+	};
+
 	const handleGenerate = resumeContextInfo => {
+		setResumeDetail({});
 		if (resumeContextInfo === '') {
-			setShowAlert(true);
-			setTimeout(() => {
-				setShowAlert(false);
-			}, 2000);
+			showMessage('Please fill in the textarea before generating the resume.');
 		} else {
 			setLoading(false);
-			const tempData = extractInformation(resumeContext);
-			setResumeDetail(tempData);
+			try {
+				const tempData = extractInformation(resumeContext);
+				setResumeDetail(tempData);
+			} catch (error) {
+				console.error(error);
+				showMessage(error);
+				setResumeDetail({});
+				// Handle the error here, e.g., show an error message
+			}
 			setLoading(true);
-			setPage(1);
 		}
 	};
 
@@ -35,17 +48,19 @@ function App() {
 		<>
 			{page === 0 ? (
 				<>
-					{showAlert && <div className='alert'>Please fill in the textarea before generating the resume.</div>}
 					<div className='builder-wrapper'>
-						<span>
-							<Template />
-						</span>
-						<span>
-							<textarea id='w3review' name='w3review' value={resumeContext} onChange={handleTextareaChange} />
-							<br />
-							<button onClick={() => setResumeContext('')}>Reset</button>
-							<button onClick={() => handleGenerate(resumeContext)}>Generate Resume</button>
-						</span>
+						<div className='container'>
+							<div className='template-container'>
+								{showAlert && <div className='alert'>{showError}</div>}
+								<Template />
+							</div>
+							<div className='input-container'>
+								<textarea id='w3review' name='w3review' value={resumeContext} onChange={handleTextareaChange} />
+								<br />
+								<button onClick={() => setResumeContext('')}>Reset</button>
+								<button onClick={() => handleGenerate(resumeContext)}>Generate Resume</button>
+							</div>
+						</div>
 					</div>
 				</>
 			) : (
@@ -57,43 +72,43 @@ function App() {
 
 function PageComponent({ data, loading, setPage }) {
 	const [hide, setHide] = useState(true);
+
 	const printResume = async () => {
 		await setHide(false);
 		await window.print();
 		await setHide(true);
 	};
+
+	if (!loading) {
+		return null; // Render nothing if loading is false
+	}
+
 	return (
 		<>
 			<div className='a4-page'>
-				{loading ? (
-					<>
-						{hide && (
-							<div style={{ display: 'flex', justifyContent: 'space-between' }} className='btn-group'>
-								<button style={{ width: '100px', marginBottom: '1rem' }} onClick={() => setPage(0)}>
-									&lt; Back
-								</button>
-								<button style={{ width: '100px', marginBottom: '1rem' }} onClick={printResume}>
-									Print
-								</button>
-							</div>
-						)}
-
-						<span>
-							<h2>{data?.name}</h2>
-							<p>{data?.title}</p>
-						</span>
-						<PersonalInfo personalInfo={data?.contact} />
-						<Summary summary={data?.summary} />
-						<Section title='Skills' list={data?.skills} />
-						<Experience title='Experience' experiences={data?.experience} />
-						<Education title='Education' education={data?.education} />
-						<Projects title='Project' projects={data?.projects} />
-						<Section title='Certification' list={data?.certifications} />
-						<Languages title='Languages' languages={data?.languages} />
-					</>
-				) : (
-					<></>
+				{hide && (
+					<div style={{ display: 'flex', justifyContent: 'space-between' }} className='btn-group'>
+						<button style={{ width: '100px', marginBottom: '1rem' }} onClick={() => setPage(0)}>
+							&lt; Back
+						</button>
+						<button style={{ width: '100px', marginBottom: '1rem' }} onClick={printResume}>
+							Print
+						</button>
+					</div>
 				)}
+
+				<span>
+					<h2>{data?.name}</h2>
+					<p>{data?.title}</p>
+				</span>
+				<PersonalInfo personalInfo={data?.contact} />
+				<Summary summary={data?.summary} />
+				<Section title='Skills' list={data?.skills} />
+				<Experience title='Experience' experiences={data?.experience} />
+				<Education title='Education' education={data?.education} />
+				<Projects title='Project' projects={data?.projects} />
+				<Section title='Certification' list={data?.certifications} />
+				<Languages title='Languages' languages={data?.languages} />
 			</div>
 		</>
 	);

@@ -1,195 +1,217 @@
+let educationIndex = -1;
+let educationInfoIndex = 0;
+
+let exprienceIndex = -1;
+let experienceInfoDesc = [];
+
+let info = {
+	name: '',
+	title: '',
+	contact: {},
+	summary: '',
+	skills: [],
+	education: [],
+	experience: [],
+	projects: [],
+	certifications: [],
+	languages: [],
+};
+
 function extractInformation(text) {
 	let section = '';
 
 	const lines = text.split('\n').map(line => line?.trim());
 
-	const info = {
-		name: '',
-		title: '',
-		contact: {},
-		summary: '',
-		skills: [],
-		education: [],
-		experience: [],
-		projects: [],
-		certifications: [],
-		languages: [],
-	};
-	let educationInfoIndex = 0;
-	let educationIndex = 0;
-
-	let experienceInfoDesc = [];
-	let experimentIndex = 0;
-
-	let count = 0;
-
-	const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-	for (const line of lines) {
-		if (line === 'Contact') {
-			section = 'contact';
-		} else if (line === 'Summary') {
-			section = 'summary';
-		} else if (line === 'Skills') {
-			section = 'skills';
-		} else if (line === 'Education') {
-			section = 'education';
-		} else if (line === 'Experience / Internships') {
-			section = 'experience';
-		} else if (line === 'Projects') {
-			section = 'projects';
-		} else if (line === 'Certifications') {
-			section = 'certifications';
-		} else if (line === 'Languages') {
-			section = 'languages';
-		} else {
-			if (line !== '') {
-				switch (section) {
-					case 'contact':
-						{
-							try {
+	try {
+		for (const line of lines) {
+			if (line === 'Contact') {
+				info.contact = {};
+				section = 'contact';
+			} else if (line === 'Summary') {
+				info.summary = '';
+				section = 'summary';
+			} else if (line === 'Skills') {
+				info.skills = [];
+				section = 'skills';
+			} else if (line === 'Education') {
+				educationIndex = -1;
+				educationInfoIndex = 0;
+				info.education = [];
+				section = 'education';
+			} else if (line === 'Experience / Internships' || line === 'Experiences') {
+				exprienceIndex = -1;
+				info.experience = [];
+				experienceInfoDesc = [];
+				section = 'experience';
+			} else if (line === 'Projects' || line === 'Project') {
+				info.projects = [];
+				section = 'projects';
+			} else if (line === 'Certifications' || line === 'Certification') {
+				info.certifications = [];
+				section = 'certifications';
+			} else if (line === 'Languages') {
+				info.languages = [];
+				section = 'languages';
+			} else {
+				if (line !== '') {
+					switch (section) {
+						case 'contact':
+							{
 								const contactInfo = line.split(':');
 								const key = contactInfo?.length > 1 && contactInfo[0]?.trim().toLowerCase().replace('-', '');
 								const value = contactInfo?.length > 1 && contactInfo[1]?.trim();
 								info.contact[key] = value;
-							} catch (e) {
-								console.error(`Error: ${e}`);
-								alert('Something went wrong in contact section.');
 							}
-						}
-						break;
-					case 'summary':
-						info.summary += line + ' ';
-						break;
-					case 'skills':
-						info.skills.push(line !== '' && line);
-						break;
-					case 'education':
-						{
-							switch (educationInfoIndex) {
-								case 0:
-									{
-										const educationInfo = line?.split(':');
-										const degreeInfo = educationInfo[0]?.split('(');
-										const degree = degreeInfo[0]?.trim();
-										const degreeAbbreviation = degreeInfo[1]?.replace(')', '')?.trim();
-										const specialization = educationInfo[1]?.trim();
-										info.education[educationIndex] = {
-											...info.education[educationIndex],
-											degree,
-											degreeAbbreviation,
-											specialization,
-										};
-									}
-									break;
-								case 1:
-									{
-										const collegeAndLocation = line?.split('-');
-										const college = collegeAndLocation[0]?.trim();
-										const locationInfo = collegeAndLocation[1]?.split(',');
-										console.log(line);
-										console.log(collegeAndLocation);
-										console.log(college);
-										console.log(locationInfo);
-										const city = locationInfo[0]?.trim();
-										const state = locationInfo[1]?.trim();
-										info.education[educationIndex] = {
-											...info.education[educationIndex],
-											college,
-											city,
-											state,
-										};
-									}
-									break;
-								case 2:
-									{
-										const graduationDate = line?.trim();
-										info.education[educationIndex] = {
-											...info.education[educationIndex],
-											graduationDate,
-										};
-									}
-									break;
+							break;
+						case 'summary':
+							info.summary += line + ' ';
+							break;
+						case 'skills':
+							info.skills.push(line !== '' && line.split('- ')[1].trim());
+							break;
+						case 'education':
+							{
+								const educationProp = { line };
+								EducationDetails(educationProp);
 							}
-							if (educationInfoIndex === 2) {
-								educationInfoIndex = 0;
-								educationIndex++;
-							} else {
-								educationInfoIndex++;
+							break;
+						case 'experience':
+							{
+								const exprienceProp = { line };
+								ExperienceDetails(exprienceProp);
 							}
-						}
-						break;
-					case 'experience':
-						{
-							if (line.startsWith('Company:')) {
-								const companyAndLocation = line?.split('-');
-								const company = companyAndLocation[0]?.split(':')[1]?.trim();
-								const location = companyAndLocation[1]?.trim();
-								info.experience[experimentIndex] = {
-									...info.experience[experimentIndex],
-									company,
-									location,
-								};
-							} else if (months.includes(line?.split(' ')[0])) {
-								const duration = line?.split('-');
-								const startDate = duration[0]?.trim();
-								const endDate = duration[1]?.trim();
-								info.experience[experimentIndex] = {
-									...info.experience[experimentIndex],
-									duration: {
-										startDate,
-										endDate,
-									},
-								};
-							} else {
-								if (line?.startsWith('-')) {
-									const description = line?.slice(1)?.trim();
-									experienceInfoDesc.push(description);
-									info.experience[experimentIndex] = {
-										...info.experience[experimentIndex],
-										description: experienceInfoDesc,
-									};
-									count++;
-								} else {
-									if (count > 0) {
-										experienceInfoDesc = [];
-										experimentIndex++;
-									}
-
-									const employeeTitle = line?.trim();
-									info.experience[experimentIndex] = {
-										...info.experience[experimentIndex],
-										employeeTitle,
-									};
-								}
+							break;
+						case 'projects':
+							info.projects.push(line?.slice(1)?.trim());
+							break;
+						case 'certifications':
+							info.certifications.push(line?.slice(1)?.trim());
+							break;
+						case 'languages':
+							info.languages.push(line.split('- ')[1].trim());
+							break;
+						default:
+							if (!info.name) {
+								info.name = line;
+							} else if (!info.title) {
+								info.title = line;
 							}
-						}
-						break;
-					case 'projects':
-						info.projects.push(line?.slice(1)?.trim());
-						break;
-					case 'certifications':
-						info.certifications.push(line?.slice(1)?.trim());
-						break;
-					case 'languages':
-						info.languages.push(line);
-						break;
-					default:
-						// Assuming the first line contains the name and the second line contains the title.
-						if (!info.name) {
-							info.name = line;
-						} else if (!info.title) {
-							info.title = line;
-						}
-						break;
+							break;
+					}
 				}
 			}
 		}
+
+		info.summary = info.summary?.trim();
+
+		return info;
+	} catch (error) {
+		throw new Error(`Error in ${section} section: ${error.message}`);
+	}
+}
+
+function EducationDetails({ line }) {
+	educationIndex++;
+	switch (educationIndex % 4) {
+		case 0:
+			{
+				const [degreeInfo, stateCity] = line.split(' - ');
+				const [degree, degreeAbbreviation] = degreeInfo.split('(');
+				const [city, state] = stateCity.split(', ');
+				info.education[educationInfoIndex] = {
+					...info.education[educationInfoIndex],
+					degree: degree.trim(),
+					degreeAbbreviation: degreeAbbreviation.replace(')', '').trim(),
+					state: state.trim(),
+					city: city.trim(),
+				};
+			}
+			break;
+		case 1:
+			info.education[educationInfoIndex] = {
+				...info.education[educationInfoIndex],
+				specialization: line.trim(),
+			};
+			break;
+		case 2:
+			info.education[educationInfoIndex] = {
+				...info.education[educationInfoIndex],
+				college: line.trim(),
+			};
+			break;
+		case 3:
+			info.education[educationInfoIndex] = {
+				...info.education[educationInfoIndex],
+				graduationDate: line.trim(),
+			};
+			educationInfoIndex++;
+			break;
+	}
+}
+
+function ExperienceDetails({ line }) {
+	let expSection = '';
+
+	if (line.startsWith('-')) {
+		expSection = 'description';
+	} else if (line.startsWith('Employee:')) {
+		expSection = 'employee';
+	} else if (line.startsWith('Employer:')) {
+		expSection = 'employer';
+	} else if (line.startsWith('Duration:')) {
+		expSection = 'duration';
 	}
 
-	info.summary = info.summary?.trim();
-
-	return info;
+	switch (expSection) {
+		case 'employee':
+			{
+				exprienceIndex++;
+				const employeeTitle = line.split(':')[1].trim();
+				info.experience[exprienceIndex] = {
+					...info.experience[exprienceIndex],
+					employeeTitle,
+				};
+			}
+			experienceInfoDesc = [];
+			break;
+		case 'employer':
+			{
+				const [companyRaw, locationRaw] = line.split(':')[1].trim().split(' - ');
+				const company = companyRaw?.trim();
+				const location = locationRaw?.trim();
+				info.experience[exprienceIndex] = {
+					...info.experience[exprienceIndex],
+					company,
+					location,
+				};
+			}
+			break;
+		case 'duration':
+			{
+				const [startDate, endDate] = line
+					.split(':')[1]
+					.trim()
+					.split(' – ' || ' - ');
+				info.experience[exprienceIndex] = {
+					...info.experience[exprienceIndex],
+					duration: {
+						startDate: startDate?.trim(),
+						endDate: endDate?.trim(),
+					},
+				};
+			}
+			break;
+		case 'description':
+			{
+				const description = line?.split('- ')[1]?.trim();
+				experienceInfoDesc.push(description);
+				info.experience[exprienceIndex] = {
+					...info.experience[exprienceIndex],
+					description: experienceInfoDesc,
+				};
+			}
+			break;
+	}
 }
 
 export default extractInformation;
