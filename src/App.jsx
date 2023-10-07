@@ -12,6 +12,7 @@ function App() {
 	const [resumeContext, setResumeContext] = useState('');
 
 	const handleTextareaChange = event => {
+		setResumeDetail(null); // Clear the data
 		setResumeContext(event.target.value);
 	};
 
@@ -23,26 +24,26 @@ function App() {
 		}, time);
 	};
 
-	const handleGenerate = resumeContextInfo => {
-		setResumeDetail({});
+	const handleGenerate = async resumeContextInfo => {
 		if (resumeContextInfo === '') {
 			showMessage('Please fill in the textarea before generating the resume.');
 		} else {
-			setLoading(false);
+			setLoading(true);
 			try {
-				const tempData = extractInformation(resumeContext);
-				setResumeDetail(tempData);
+				const data = extractInformation(resumeContextInfo);
+				setResumeDetail(data);
 			} catch (error) {
 				console.error(error);
-				showMessage(error);
-				setResumeDetail({});
-				// Handle the error here, e.g., show an error message
+				showMessage(`An error occurred while generating the resume. ${error}`); // Display a generic error message
+				// Handle the error here, e.g., log it or perform additional error handling as needed
+			} finally {
+				setLoading(false);
+				setPage(1);
 			}
-			setLoading(true);
 		}
 	};
 
-	const propComp = { loading: isLoading, data, setPage };
+	const propComp = { loading: isLoading, data, setPage, setResumeDetail };
 
 	return (
 		<>
@@ -71,6 +72,8 @@ function App() {
 }
 
 function PageComponent({ data, loading, setPage }) {
+	const { name, title, contact, summary, skills, experience, education, projects, certifications, languages } = data;
+
 	const [hide, setHide] = useState(true);
 
 	const printResume = async () => {
@@ -79,8 +82,8 @@ function PageComponent({ data, loading, setPage }) {
 		await setHide(true);
 	};
 
-	if (!loading) {
-		return null; // Render nothing if loading is false
+	if (loading) {
+		return <h1>Loading0000</h1>; // Render nothing if loading is false
 	}
 
 	return (
@@ -98,17 +101,17 @@ function PageComponent({ data, loading, setPage }) {
 				)}
 
 				<span>
-					<h2>{data?.name}</h2>
-					<p>{data?.title}</p>
+					<h2>{name}</h2>
+					<p>{title}</p>
 				</span>
-				<PersonalInfo personalInfo={data?.contact} />
-				<Summary summary={data?.summary} />
-				<Section title='Skills' list={data?.skills} />
-				<Experience title='Experience' experiences={data?.experience} />
-				<Education title='Education' education={data?.education} />
-				<Projects title='Project' projects={data?.projects} />
-				<Section title='Certification' list={data?.certifications} />
-				<Languages title='Languages' languages={data?.languages} />
+				<PersonalInfo personalInfo={contact} />
+				<Summary summary={summary} />
+				<Section title='Skills' list={skills} />
+				{experience?.length > 0 && <Experience title='Experience' experiences={experience} />}
+				{education.length > 0 && <Education title='Education' education={education} />}
+				{projects?.length > 0 && <Projects title='Project' projects={projects} />}
+				{certifications?.length > 0 && <Section title='Certifications' list={certifications} />}
+				{languages?.length > 0 && <Languages title='Languages' languages={languages} />}
 			</div>
 		</>
 	);

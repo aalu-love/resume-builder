@@ -106,7 +106,7 @@ function extractInformation(text) {
 
 		return info;
 	} catch (error) {
-		throw new Error(`Error in ${section} section: ${error.message}`);
+		throw new Error(`Error in ${section} section`);
 	}
 }
 
