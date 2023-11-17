@@ -109,9 +109,11 @@ function PageComponent({ data, loading, setPage }) {
 				<Section title='Skills' list={skills} />
 				{experience?.length > 0 && <Experience title='Experience' experiences={experience} />}
 				{education.length > 0 && <Education title='Education' education={education} />}
-				{projects?.length > 0 && <Projects title='Project' projects={projects} />}
-				{certifications?.length > 0 && <Section title='Certifications' list={certifications} />}
-				{languages?.length > 0 && <Languages title='Languages' languages={languages} />}
+				<div className='pcl-wrapper'>
+					{projects?.length > 0 && <Projects title='Project' projects={projects} />}
+					{certifications?.length > 0 && <Section title='Certifications' list={certifications} />}
+					{languages?.length > 0 && <Languages title='Languages' languages={languages} />}
+				</div>
 			</div>
 		</>
 	);
