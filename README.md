@@ -93,7 +93,7 @@ Bachelor of Computer Applications (BCA): Information Technology
 [University Name] - [Location]
 [Graduation Date]
 
-Experience
+Experiences
 Employee: [Your Job Title]
 Employer: [Company Name]
 Duration: [Start Date] - [End Date]
