@@ -85,13 +85,15 @@ Skills
 - Operating Systems: [Operating Systems]
 
 Education
-Master of Computer Applications (MCA): Information Technology
-[University Name] - [Location]
-(Expected Graduation: [Expected Graduation Date])
+Degree (Degree Abbreviation) - City, State
+Information Technology
+Collage/University Name
+(Expected Graduation: August 2023)
 
-Bachelor of Computer Applications (BCA): Information Technology
-[University Name] - [Location]
-[Graduation Date]
+Degree (Degree Abbreviation) - City, State
+Information Technology
+Collage/University Name
+September 2021
 
 Experiences
 Employee: [Your Job Title]
