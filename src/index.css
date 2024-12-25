@@ -1,50 +1,46 @@
 :root {
-	font-family: 'Roboto Slab', serif;
-	line-height: 1.5;
-	font-weight: 400;
+    font-family: "Roboto Slab", serif;
+    line-height: 1.5;
+    font-weight: 400;
 
-	color-scheme: light dark;
+    color-scheme: light dark;
 
-	font-synthesis: none;
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-text-size-adjust: 100%;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
-	margin: 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 100vh;
-	overflow-x: hidden;
-	/*
+    margin: 0;
+    overflow-x: hidden;
+    /*
 	* Created with https://www.css-gradient.com
 	* Gradient link: https://www.css-gradient.com/?c1=0b27aa&c2=58b7d9&gt=l&gd=dtl
 	*/
-	background: #0b27aa;
-	background: linear-gradient(135deg, #0b27aa, #58b7d9);
+    background: #0b27aa;
+    background: linear-gradient(135deg, #0b27aa, #58b7d9);
 }
 
 /* width */
 ::-webkit-scrollbar {
-	width: 2px;
+    width: 2px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-	box-shadow: inset 0 0 5px #58b7d9;
-	border-radius: 10px;
+    box-shadow: inset 0 0 5px #58b7d9;
+    border-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: #0b27aa;
-	border-radius: 10px;
+    background: #0b27aa;
+    border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-	background: #0b27aa;
+    background: #0b27aa;
 }
