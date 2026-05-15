@@ -31,6 +31,8 @@ function App() {
     setResumeContext(event.target.value);
   };
 
+  const placeholderText = `Your Name\nYour Job Title | Your Key Strengths\n\nContact\nEmail: you@example.com\nPhone: +1 555 123 4567\nLinkedIn: linkedin.com/in/your-name\n\nSummary\nA concise summary of your experience and goals.\n\nSkills\n- Skill 1\n- Skill 2\n- Skill 3\n\nEducation\nDegree | University | Year\n`;
+
   const showMessage = (message, time = 2000) => {
     setError(message);
     setShowAlert(true);
@@ -90,8 +92,7 @@ function App() {
       {page === 0 ? (
         <>
           <div className="builder-wrapper">
-            <p className="header">Resume Builder</p>
-            <div className="container">
+            <div className="builder-card">
               <div className="template-container">
                 <ShowMessage
                   show={showAlert}
@@ -99,20 +100,38 @@ function App() {
                   type="error"
                 />
                 <Template />
+                <ShortcutButton setResumeContext={setResumeContext} />
               </div>
-              <ShortcutButton setResumeContext={setResumeContext} />
               <div className="input-container">
+                <div className="input-header">
+                  <h3>Resume content</h3>
+                  <p>
+                    Type directly or use the section buttons to build your
+                    resume.
+                  </p>
+                </div>
                 <textarea
                   id="w3review"
                   name="w3review"
                   value={resumeContext}
                   onChange={handleTextareaChange}
+                  placeholder={placeholderText}
                 />
-                <br />
-                <button onClick={() => setResumeContext("")}>Reset</button>
-                <button onClick={() => handleGenerate(resumeContext)}>
-                  Generate Resume
-                </button>
+                <div className="button-row">
+                  <button
+                    type="button"
+                    className="button-secondary"
+                    onClick={() => setResumeContext("")}
+                  >
+                    Reset
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleGenerate(resumeContext)}
+                  >
+                    Generate Resume
+                  </button>
+                </div>
               </div>
             </div>
           </div>
