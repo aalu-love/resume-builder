@@ -1,17 +1,22 @@
 import { useRef, useState } from "react";
 import extractInformation from "./helper/ResumeBuilderHelper";
 import Template from "./helper/Template";
+import ShowMessage from "./helper/ShowMessage/ShowMessage";
 
 import "./App.scss";
-import AddName from "./Shared/AddName/AddName";
-import AddContact from "./Shared/AddContact/AddContact";
-import AddSummary from "./Shared/AddSummary/AddSummary";
-import AddSkills from "./Shared/AddSkills/AddSkills";
-import AddEducation from "./Shared/AddEducation/AddEducation";
-import AddExprience from "./Shared/AddExprience/AddExprience";
-import AddProject from "./Shared/AddProject/AddProject";
-import AddCertification from "./Shared/AddCertification/AddCertification";
-import AddLanguage from "./Shared/AddLanguage/AddLanguage";
+
+import {
+  PersonalInfo,
+  Education,
+  Experience,
+  Languages,
+  Projects,
+  Summary,
+  Section,
+} from "./modules";
+
+import { SECTION_TEMPLATE } from "./helper/sectionTemplate";
+import SectionShortcutButton from "./Shared/SectionShortcutButton";
 
 function App() {
   const [page, setPage] = useState(0);
@@ -40,6 +45,7 @@ function App() {
     }
 
     const lines = text.split("\n").filter((line) => line.trim());
+
     if (lines.length < 3) {
       return "Resume needs at least a name, job title, and one section.";
     }
@@ -87,7 +93,11 @@ function App() {
             <p className="header">Resume Builder</p>
             <div className="container">
               <div className="template-container">
-                {showAlert && <div className="alert">{showError}</div>}
+                <ShowMessage
+                  show={showAlert}
+                  message={showError}
+                  type="error"
+                />
                 <Template />
               </div>
               <ShortcutButton setResumeContext={setResumeContext} />
@@ -118,15 +128,14 @@ function ShortcutButton(props) {
   const { setResumeContext } = props;
   return (
     <div className="shortcut-btn">
-      <AddName setResumeContext={setResumeContext} />
-      <AddContact setResumeContext={setResumeContext} />
-      <AddSummary setResumeContext={setResumeContext} />
-      <AddSkills setResumeContext={setResumeContext} />
-      <AddEducation setResumeContext={setResumeContext} />
-      <AddExprience setResumeContext={setResumeContext} />
-      <AddProject setResumeContext={setResumeContext} />
-      <AddCertification setResumeContext={setResumeContext} />
-      <AddLanguage setResumeContext={setResumeContext} />
+      {SECTION_TEMPLATE.map((section) => (
+        <SectionShortcutButton
+          key={section.label}
+          label={`Add ${section.label}`}
+          snippet={section.snippet}
+          setResumeContext={setResumeContext}
+        />
+      ))}
     </div>
   );
 }
@@ -150,80 +159,6 @@ function PageComponent({ data, loading, setPage }) {
   const printRef = useRef();
 
   const printResume = async () => {
-    //         if (printRef.current) {
-    //             const printContent = printRef.current.innerHTML;
-    //             const newWindow = window.open("", "_blank", "width=800,height=600");
-    //             newWindow.document.open();
-    // 			newWindow.document.element
-    //             newWindow.document.write(`
-    // 			<html>
-    // 				<head>
-    // 				<title>Print</title>
-    // 				<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet" />
-    // 				<style>
-    // 					.a4-page {
-    //         font-family: Arial, Helvetica, sans-serif;
-    //     width: 595px;
-    //     height: 842px;
-    //     a {
-    //         color: black;
-    //         text-decoration: none;
-    //     }
-    //     table {
-    //         padding-top: 1%;
-    //     }
-    //     table,
-    //     td {
-    //         font-size: 0.8rem;
-    //         padding-right: 8px;
-    //     }
-    //     .summary,
-    //     .skills,
-    //     .experience,
-    //     .project,
-    //     .education,
-    //     .certification {
-    //         padding-bottom: 1%;
-    //     }
-    //     .summary {
-    //         p {
-    //             padding-top: 1%;
-    //             font-size: 0.8rem;
-    //         }
-    //     }
-    //     .education {
-    //         .education-item {
-    //             margin-bottom: 1%;
-    //         }
-    //     }
-    //     .experience {
-    //         .experience-item {
-    //             padding-bottom: 1%;
-    //         }
-    //     }
-    //     .pcl-wrapper {
-    //         display: flex;
-    //         div {
-    //             width: 100%;
-    //             .header {
-    //                 padding-block: 1.5%;
-    //             }
-    //         }
-    //         div:not(:first-child) {
-    //             margin-left: 1.5%;
-    //         }
-    //     }
-    // }
-    // 				</style>
-    // 				</head>
-    // 				<body>
-    // 				${printContent}
-    // 				</body>
-    // 			</html>
-    // 			`);
-    //             newWindow.document.close();
-    //             newWindow.print();
-    //         }
     await setHide(false);
     await window.print();
     await setHide(true);
@@ -255,7 +190,7 @@ function PageComponent({ data, loading, setPage }) {
           </span>
           <PersonalInfo personalInfo={contact} />
           <Summary summary={summary} />
-          <Section title="Skills" list={skills} />
+          {skills?.length > 0 && <Section title="Skills" list={skills} />}
           {experience?.length > 0 && (
             <Experience title="Experience" experiences={experience} />
           )}
@@ -275,230 +210,6 @@ function PageComponent({ data, loading, setPage }) {
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-function PersonalInfo({ personalInfo }) {
-  const { address, phone, email, linkedin, github, portfolio } = personalInfo;
-
-  return (
-    <div className="personal-info">
-      <div className="personal-info">
-        <span>
-          <table>
-            <tbody>
-              <tr>
-                <td>
-                  <strong>Address: </strong>
-                </td>
-                <td>{address}</td>
-                <td>
-                  <strong>Phone: </strong>
-                </td>
-                <td>{phone}</td>
-                <td>
-                  <strong>Email: </strong>
-                </td>
-                <td>
-                  <a href={`mailto:${email}`}>{email}</a>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>LinkedIn: </strong>
-                </td>
-                <td>
-                  <a
-                    href={`https://linkedin.com/in/${linkedin}`}
-                    rel="noreferrer"
-                  >
-                    {linkedin}
-                  </a>
-                </td>
-                <td>
-                  <strong>Portfolio: </strong>
-                </td>
-                <td>{portfolio}</td>
-                <td>
-                  <strong>Github: </strong>
-                </td>
-                <td>
-                  <a href={`https://${github}`}>{github}</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </span>
-      </div>
-    </div>
-  );
-}
-
-function Summary({ summary }) {
-  return (
-    <div className="summary">
-      <p>{summary}</p>
-    </div>
-  );
-}
-
-function Section({ title, list }) {
-  return (
-    <div className={title.toLowerCase()}>
-      <div className="section">
-        <div className="header">
-          <Header title={title} />
-        </div>
-        <div className="body">
-          <ul>
-            {list.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Experience({ title, experiences }) {
-  return (
-    <div className={title.toLowerCase()}>
-      <div className="section">
-        <div className="header">
-          <Header title={title} />
-        </div>
-        <div className="body">
-          {experiences?.map((experience, index) => (
-            <ExperienceItem key={index} experience={experience} />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ExperienceItem({ experience }) {
-  const { employeeTitle, company, location, duration, description } =
-    experience;
-
-  return (
-    <div className="experience-item">
-      <p>
-        <strong>{employeeTitle}</strong>
-      </p>
-      <p>
-        <strong>
-          {company} {location ? ` - ${location}` : ""}
-        </strong>
-      </p>
-      <p>
-        {duration?.startDate} - {duration?.endDate}
-      </p>
-      <ul>
-        {description?.map((detail, index) => (
-          <li key={index}>{detail}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function Education({ education, title }) {
-  console.log(title, education);
-  return (
-    <div className={title.toLowerCase()}>
-      <div className="section">
-        <div className="header">
-          <Header title={title} />
-        </div>
-        <div className="body">
-          {education.map((edu, index) => (
-            <EducationItem key={index} education={edu} />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function EducationItem({ education }) {
-  const {
-    degree,
-    degreeAbbreviation,
-    college,
-    specialization,
-    graduationDate,
-    state,
-    city,
-  } = education;
-
-  return (
-    <div className="education-item">
-      <p>
-        <strong>
-          {degree} ({degreeAbbreviation}) - {city}, {state}
-          <br />
-          {specialization}
-        </strong>
-      </p>
-      <p>{college}</p>
-      <p>{graduationDate}</p>
-    </div>
-  );
-}
-
-function Projects({ projects, title }) {
-  return (
-    <div className={title.toLowerCase()}>
-      <div className="section">
-        <div className="header">
-          <Header title={title} />
-        </div>
-        <div className="body">
-          <ul>
-            {projects.map((project, index) => (
-              <ProjectItem key={index} project={project} />
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ProjectItem({ project }) {
-  return (
-    <li>
-      <div className="project-item">
-        <p>{project}</p>
-      </div>
-    </li>
-  );
-}
-
-function Languages({ title, languages }) {
-  return (
-    <div className="section">
-      <div className="header">
-        <Header title={title} />
-      </div>
-      <div className="body">
-        <ul>
-          {languages.map((attr, index) => (
-            <li key={index}>{attr}</li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
-}
-
-function Header({ title }) {
-  return (
-    <div>
-      <h4>{title}</h4>
     </div>
   );
 }

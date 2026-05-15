@@ -20,8 +20,17 @@ Skills
 - Tools: Git, Docker, AWS
 
 Education
-Bachelor of Computer Science (BCS): Computer Science
-University of Technology - San Francisco, CA - May 2020
+Bachelor of Computer Science|BCS
+San Francisco|CA
+Information Technology
+University of Technology
+Pursing Graduation: May 2020
+
+Master of Science|MS
+New York|NY
+Computer Science
+State University
+Expected Graduation: August 2023
 
 Experience / Internships
 Employee: Senior Software Engineer

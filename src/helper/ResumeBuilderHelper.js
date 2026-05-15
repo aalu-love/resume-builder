@@ -130,7 +130,7 @@ function parseSkills(line, info) {
     const skill = line.split("-")[1]?.trim();
     if (skill) info.skills.push(skill);
   } else if (line.includes(":")) {
-    const [category, skills] = line.split(":").map((s) => s.trim());
+    const [skills] = line.split(":").map((s) => s.trim());
     if (skills) {
       skills.split(",").forEach((skill) => {
         const trimmed = skill.trim();
