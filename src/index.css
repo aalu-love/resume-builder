@@ -1,4 +1,14 @@
 :root {
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
   color-scheme: light dark;
 
   font-synthesis: none;
@@ -16,12 +26,6 @@ body {
 	* Gradient link: https://www.css-gradient.com/?c1=0b27aa&c2=58b7d9&gt=l&gd=dtl
 	*/
   background: linear-gradient(135deg, #0b27aa, #58b7d9);
-}
-
-* {
-  font-family: Inter !important;
-  line-height: 1.5;
-  font-weight: 400;
 }
 
 /* width */
