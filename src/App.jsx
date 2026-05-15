@@ -91,33 +91,55 @@ function App() {
     <>
       {page === 0 ? (
         <>
-          <div className="builder-wrapper">
-            <div className="builder-card">
-              <div className="template-container">
+          <div className="resume-builder-page">
+            <div className="resume-builder-grid">
+              <aside className="resume-builder-sidebar">
+                <div className="resume-builder-sidebar-top">
+                  <p className="resume-builder-title">Resume Builder</p>
+                  <p className="resume-builder-subtitle">
+                    Build a polished resume quickly using shortcuts and a live
+                    editor.
+                  </p>
+                </div>
+
                 <ShowMessage
                   show={showAlert}
                   message={showError}
                   type="error"
                 />
-                <Template />
-                <ShortcutButton setResumeContext={setResumeContext} />
-              </div>
-              <div className="input-container">
-                <div className="input-header">
-                  <h3>Resume content</h3>
-                  <p>
-                    Type directly or use the section buttons to build your
-                    resume.
-                  </p>
+
+                <div className="resume-builder-instructions">
+                  <Template />
                 </div>
+
+                <div className="resume-builder-shortcuts">
+                  <h3>Quick section snippets</h3>
+                  <ShortcutButton setResumeContext={setResumeContext} />
+                </div>
+              </aside>
+
+              <main className="resume-builder-main">
+                <div className="resume-builder-main-header">
+                  <h3>Resume text</h3>
+                  <p>
+                    Type here or use shortcut buttons to add section templates.
+                  </p>
+                  {/* <p>
+                    Tip: Use GPT with template provided in github repo for best
+                    results.
+                  </p> */}
+                </div>
+
                 <textarea
                   id="w3review"
                   name="w3review"
+                  className="resume-builder-textarea"
                   value={resumeContext}
                   onChange={handleTextareaChange}
                   placeholder={placeholderText}
                 />
-                <div className="button-row">
+
+                <div className="resume-builder-actions">
                   <button
                     type="button"
                     className="button-secondary"
@@ -132,7 +154,7 @@ function App() {
                     Generate Resume
                   </button>
                 </div>
-              </div>
+              </main>
             </div>
           </div>
         </>
@@ -198,7 +220,10 @@ function PageComponent({ data, loading, setPage }) {
           className="btn-group"
         >
           <button onClick={() => setPage(0)}>&lt; Back</button>
-          <button onClick={printResume}>Print</button>
+          <div>
+            <button onClick={printResume}>Print</button>
+            <p className="tip">Tip: Use Margin 0 for best results</p>
+          </div>
         </div>
       )}
       <div ref={printRef} className="print-ref">
