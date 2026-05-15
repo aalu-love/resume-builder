@@ -50,7 +50,6 @@ Repository: [Resume Builder GitHub Repository](https://github.com/aalu-love/resu
 
 - SANJU BODRA
 - Contact: [sanjubodra1420@gmail.com](mailto:sanjubodra1420@gmail.com)
-- GitHub: [https://github.com/aalu-love](https://github.com/aalu-love)
 
 ---
 
@@ -58,71 +57,56 @@ Feel free to customize this Markdown file to include more details about your pro
 
 ## Template
 ```
-
-[Your Name]
-[Your Job Title] | [Your Skills/Expertise]
+John Doe
+Software Developer | Full Stack Engineer
 
 Contact
-Address: [Your Address]
-Phone: [Your Phone Number]
-Email: [Your Email]
-LinkedIn: [Your LinkedIn Profile]
-Portfolio: [Your Portfolio Website]
-Github: [Your GitHub Profile]
+Address: 123 Main St, Anytown, CA
+Phone: (555) 123-4567
+Email: john.doe@email.com
+LinkedIn: linkedin.com/in/johndoe
+Github: github.com/johndoe
 
 Summary
-[Summary About Yourself]
+Experienced software developer with 5+ years of expertise in full-stack development, specializing in React, Node.js, and cloud technologies.
 
 Skills
-- Programming: [Programming Languages]
-- Databases: [Databases]
-- Frameworks/Libraries: [Frameworks and Libraries]
-- Build Tools: [Build Tools]
-- Tools/Technologies: [Tools and Technologies]
-- Web Development: [Web Development Technologies]
-- Data Analysis: [Data Analysis Skills]
-- Version Control: [Version Control Tools]
-- Operating Systems: [Operating Systems]
+- Programming: JavaScript, Python, Java
+- Frameworks: React, Node.js, Express
+- Databases: MongoDB, PostgreSQL
+- Tools: Git, Docker, AWS
 
 Education
-Degree (Degree Abbreviation) - City, State
+Bachelor of Computer Science|BCS
+San Francisco|CA
 Information Technology
-Collage/University Name
-(Expected Graduation: August 2023)
+University of Technology
+Pursing Graduation: May 2020
 
-Degree (Degree Abbreviation) - City, State
-Information Technology
-Collage/University Name
-September 2021
+Master of Science|MS
+New York|NY
+Computer Science
+State University
+Expected Graduation: August 2023
 
-Experiences
-Employee: [Your Job Title]
-Employer: [Company Name]
-Duration: [Start Date] - [End Date]
-- [Key Responsibility or Achievement]
-- [Key Responsibility or Achievement]
-- [Key Responsibility or Achievement]
-
-Employee: [Your Job Title]
-Employer: [Company Name]
-Duration: [Start Date] - [End Date]
-- [Key Responsibility or Achievement]
-- [Key Responsibility or Achievement]
-- [Key Responsibility or Achievement]
+Experience / Internships
+Employee: Senior Software Engineer
+Employer: Tech Corp - San Francisco, CA
+Duration: June 2021 - Present
+- Led development of microservices architecture
+- Improved application performance by 40%
+- Mentored junior developers
 
 Projects
-- [Project Name]
-- [Project Name]
-- [Project Name]
-- ...
+- E-commerce Platform: Built with React and Node.js
+- Data Analytics Dashboard: Python and D3.js visualization
 
 Certifications
-- [Certification Name]
-- [Certification Name]
-- ...
+- AWS Certified Solutions Architect
+- Google Cloud Professional Developer
 
 Languages
-- English (Fluent)
-- Hindi (Native)
+- English: Native
+- Spanish: Intermediate
 
 ```
