@@ -10,7 +10,9 @@ export function Section({ title, list }) {
         <div className="body">
           <ul>
             {list.map((item, index) => (
-              <li key={index}>{item}</li>
+              <li key={index}>
+                <p>{item}</p>
+              </li>
             ))}
           </ul>
         </div>

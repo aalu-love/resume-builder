@@ -31,7 +31,7 @@ function ExperienceItem({ experience }) {
       </p>
       <ul>
         {description?.map((detail, index) => (
-          <li key={index}>{detail}</li>
+          <li key={index}><p>{detail}</p></li>
         ))}
       </ul>
     </div>

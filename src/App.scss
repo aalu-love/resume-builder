@@ -273,7 +273,6 @@ button:hover {
   margin: 1rem 2rem;
 
   .section {
-    font-size: 0.8rem;
     .header {
       color: black !important;
       padding-block: 0.5%;
@@ -281,7 +280,7 @@ button:hover {
       border-bottom: 0.5px solid rgb(117, 117, 117);
 
       h4 {
-        font-size: 0.9rem;
+        font-size: 1rem;
         padding-left: 2%;
       }
     }
@@ -315,13 +314,25 @@ button:hover {
       text-decoration: none;
     }
 
+    p {
+      font-size: 1em !important;
+    }
+
+    .info-title {
+      font-size: 1em;
+    }
+
+    .personal-info {
+      padding-top: 0.5%;
+    }
+
     table {
       padding-top: 1%;
     }
 
     table,
     td {
-      font-size: 0.8rem;
+      font-size: 1rem;
       padding-right: 8px;
     }
     .summary,
@@ -336,7 +347,7 @@ button:hover {
     .summary {
       p {
         padding-top: 1%;
-        font-size: 0.8rem;
+        font-size: 1rem;
       }
     }
 

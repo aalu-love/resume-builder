@@ -9,7 +9,9 @@ export function Languages({ title, languages }) {
       <div className="body">
         <ul>
           {languages.map((attr, index) => (
-            <li key={index}>{attr}</li>
+            <li key={index}>
+              <p>{attr}</p>
+            </li>
           ))}
         </ul>
       </div>

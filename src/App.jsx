@@ -229,8 +229,8 @@ function PageComponent({ data, loading, setPage }) {
       <div ref={printRef} className="print-ref">
         <div className="a4-page">
           <span>
-            <h2>{name}</h2>
-            <p>{title}</p>
+            <h1 className="info-name">{name}</h1>
+            <p className="info-title">{title}</p>
           </span>
           <PersonalInfo personalInfo={contact} />
           <Summary summary={summary} />
