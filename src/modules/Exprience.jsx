@@ -24,14 +24,9 @@ function ExperienceItem({ experience }) {
   return (
     <div className="experience-item">
       <p>
-        <strong>{employeeTitle}</strong>
-      </p>
-      <p>
         <strong>
-          {company} {location ? ` - ${location}` : ""}
+          {employeeTitle} | {company} {location ? ` - ${location}` : ""} |{" "}
         </strong>
-      </p>
-      <p>
         {duration?.startDate} - {duration?.endDate}
       </p>
       <ul>
