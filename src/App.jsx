@@ -241,10 +241,10 @@ function PageComponent({ data, loading, setPage }) {
           {education?.length > 0 && (
             <Education title="Education" education={education} />
           )}
+          {projects?.length > 0 && (
+            <Projects title="Project" projects={projects} />
+          )}
           <div className="pcl-wrapper">
-            {projects?.length > 0 && (
-              <Projects title="Project" projects={projects} />
-            )}
             {certifications?.length > 0 && (
               <Section title="Certifications" list={certifications} />
             )}

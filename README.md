@@ -2,6 +2,9 @@
 
 The **Resume Builder** is a web application that allows users to easily generate their own resumes by filling out a text template with their personal information, skills, education, work experience, and more.
 
+## Screenshot
+![image](public\image.png)
+
 ## Features
 
 - User-friendly interface for entering resume content.

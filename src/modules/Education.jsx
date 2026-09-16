@@ -23,7 +23,7 @@ function EducationItem({ education }) {
     degree,
     degreeAbbreviation,
     college,
-    specialization,
+    // specialization,
     graduationDate,
     state,
     city,
@@ -33,10 +33,11 @@ function EducationItem({ education }) {
     <div className="education-item">
       <p>
         <strong>
-          {degree} ({degreeAbbreviation}) - {city}, {state}
-          <br />
-          {specialization}
-        </strong>
+          {degree} ({degreeAbbreviation})
+        </strong>{" "}
+        - {city}, {state}
+        <br />
+        {/* {specialization} */}
       </p>
       <p>{college}</p>
       <p>{graduationDate}</p>

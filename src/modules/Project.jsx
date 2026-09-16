@@ -9,8 +9,12 @@ export function Projects({ projects, title }) {
         </div>
         <div className="body">
           <ul>
-            {projects.map((project, index) => (
-              <ProjectItem key={index} project={project} />
+            {projects.map(({ title, description }, index) => (
+              <ProjectItem
+                key={index}
+                title={title}
+                description={description}
+              />
             ))}
           </ul>
         </div>
@@ -19,11 +23,14 @@ export function Projects({ projects, title }) {
   );
 }
 
-function ProjectItem({ project }) {
+function ProjectItem({ title, description }) {
   return (
     <li>
       <div className="project-item">
-        <p>{project}</p>
+        <p>
+          <strong>{title}</strong>
+          <p>{description}</p>
+        </p>
       </div>
     </li>
   );

@@ -5,7 +5,7 @@ export function PersonalInfo({ personalInfo }) {
     <div className="personal-info">
       <span>
         <p>
-          {email} | {phone} | {linkedin} |{" "}
+          {email} | {phone} | {linkedin ? `linkedin.com/${linkedin}` : ""} |{" "}
           {github ? `github.com/${github}` : ""} | {portfolio} | {address}
         </p>
       </span>

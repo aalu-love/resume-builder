@@ -242,7 +242,11 @@ function parseExperience(line, info) {
 function parseProject(line, info) {
   if (line.startsWith("-")) {
     const project = line.substring(1).trim();
-    if (project) info.projects.push(project);
+    const [title, description] = project.split(":").map((s) => s.trim());
+    if (title) {
+      const projectObj = { title, description: description || "" };
+      info.projects.push(projectObj);
+    }
   }
 }
 
