@@ -1,9 +1,9 @@
-# [Resume Builder Project](https://resume-builder-umber.vercel.app)
+# [Resume Builder Project](https://resume-builder-rosy-chi.vercel.app/)
 
 The **Resume Builder** is a web application that allows users to easily generate their own resumes by filling out a text template with their personal information, skills, education, work experience, and more.
 
 ## Screenshot
-![image](public\image.png)
+![image](public/image.png)
 
 ## Features
 
